@@ -53,8 +53,8 @@ struct Wrapper
         std::cout << "Wrapper::print(" << val << ")" << std::endl;
     }
 
+private:
     Type val;
-
 };
 
 template<>
@@ -63,15 +63,15 @@ void Wrapper<Point>::print()
     std::cout << "Wrapper::print(" << val.toString() << ")" << std::endl;
 }
 
+void variadicHelper(){}
+
 template<typename T, typename ...Args>
 void variadicHelper(T&& first, Args&& ... everythingElse)
 {
     Wrapper wrapper ( std::forward<T>(first));
     wrapper.print();
-    variadicHelper(std::forward<Args>( everythingElse)...); //recursive call
+    variadicHelper(std::forward<Args>( everythingElse)...); 
 }
-
-void variadicHelper(){}
 
 /*
  MAKE SURE YOU ARE NOT ON THE MASTER BRANCH
