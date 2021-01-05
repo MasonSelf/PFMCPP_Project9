@@ -48,6 +48,11 @@ struct Wrapper
         std::cout << "Wrapper(" << typeid(val).name() << ")" << std::endl; 
     }
 
+    void print()
+    {
+        std::cout << "Wrapper::print(" << val << ")" << std::endl;
+    }
+
     Type val;
 
 };
@@ -55,6 +60,8 @@ struct Wrapper
 template<typename T, typename ...Args>
 void variadicHelper(T&& first, Args&& ... everythingElse)
 {
+    Wrapper wrapper ( std::forward<T>(first));
+    wrapper.print();
     variadicHelper(std::forward<Args>( everythingElse)...); //recursive call
 }
 /*
